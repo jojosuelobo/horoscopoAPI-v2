@@ -13,7 +13,5 @@ namespace consultaAstrologiaAPI.Controllers
             HoroscopoDTO horoscopo = new HoroscopoDTO();
             return horoscopo;
         }
-
-        // TESTE
     }
 }
