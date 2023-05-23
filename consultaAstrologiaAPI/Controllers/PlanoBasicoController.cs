@@ -5,9 +5,9 @@ namespace consultaAstrologiaAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class HoroscopoController : Controller
+    public class PlanoBasicoController : Controller
     {
-        [HttpGet(Name = "GetHoroscopoDTO")]
+        [HttpGet(Name = "GetPlanoBasico")]
         public HoroscopoDTO Get()
         {
             HoroscopoDTO horoscopo = new HoroscopoDTO();
