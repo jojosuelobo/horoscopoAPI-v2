@@ -9,7 +9,7 @@ namespace consultaAstrologiaAPI.DTO
         public string signoChines { get; set; }
         public string signo { get; set; }   
         public string fraseChinesa { get; set; }
-        public string frase { get; set; }   
+        public string frase { get; set; }
 
         public PremiumDTO()
         {

@@ -40,7 +40,7 @@
         "O signo ascendente descreve a primeira impressão que você causa nas pessoas.",
         "A energia de Marte representa a ação e a paixão em sua vida.",
         "Vênus influencia seus relacionamentos amorosos e sua apreciação pela beleza.",
-        "Júpiter traz sorte e expansão em"
+        "Júpiter traz sorte e expansão em seu coração >w<"
         };
 
         public HoroscopoDTO()

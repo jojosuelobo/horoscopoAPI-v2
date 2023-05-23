@@ -7,11 +7,22 @@ namespace consultaAstrologiaAPI.Controllers
     [Route("[controller]")]
     public class PlanoPremiumController : Controller
     {
+        private static readonly string[] UsersPremium = {
+        "gabriel", "josue", "caio", "vinicius", "felca"
+        };
+
         [HttpGet(Name = "GetPlanoPremium")]
-        public PremiumDTO Get()
+        public PremiumDTO Get(string user)
         {
-            PremiumDTO premium = new PremiumDTO();
-            return premium;
+            for(int i = 0; i < UsersPremium.Length; i++)
+            {
+                if(user == UsersPremium[i])
+                {
+                    PremiumDTO premium = new PremiumDTO();
+                    return premium;
+                }
+            }
+            return null;
         }
     }
 }
