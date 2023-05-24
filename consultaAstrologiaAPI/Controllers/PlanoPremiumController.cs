@@ -22,7 +22,8 @@ namespace consultaAstrologiaAPI.Controllers
                     return premium;
                 }
             }
-            return null;
+            PremiumDTO premiumFake = new PremiumDTO(false);
+            return premiumFake;
         }
     }
 }

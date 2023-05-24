@@ -10,6 +10,7 @@ namespace consultaAstrologiaAPI.DTO
         public string signo { get; set; }   
         public string fraseChinesa { get; set; }
         public string frase { get; set; }
+        public bool status { get; set; }
 
         public PremiumDTO()
         {
@@ -20,6 +21,17 @@ namespace consultaAstrologiaAPI.DTO
 
             signo = horoscopo.signo;
             frase = horoscopo.frase;
+            status = true;
+        }
+
+        public PremiumDTO(bool status)
+        {
+            signoChines = "";
+            fraseChinesa = "";
+
+            signo = "";
+            frase = "";
+            status = false;
         }
     }
 }
