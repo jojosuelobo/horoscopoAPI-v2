@@ -1,0 +1,161 @@
+<meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<style>
+    body {
+        color: white;
+        text-align: center;
+        background-image: url('https://images.wallpaperscraft.com/image/single/stars_universe_space_118205_2560x1440.jpg');
+    }
+    .btn {
+        background-color: green;
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+    .btn1 {
+        background-color: yellow;
+        border: none;
+        color: black;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+    .btn2 {
+        background-color: blue;
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+
+    
+</style>
+<body>
+    
+
+<div id="app">
+    <div>
+        <h1>Zodíaco</h1>
+        <label for="text">Usuário:</label>
+        <input type="text" v-model="name" placeholder="Digite seu nome de usuário">
+        <button class="btn" @click="Autenticate"> Confirmar </button>
+    </div>
+    <br>
+    <div>
+        <button class="btn1" @click="getBasicMessage"> Mensagem Básica </button>
+        <button class="btn2" @click="getPremiumMessage" :disabled="blockBtn" > Mensagem Premium </button>
+    </div>
+    <br>
+    <div>
+        {{signo}}:
+        <br>
+        {{message}}
+    </div>
+    <br>
+    <div>
+        {{chineseSigno}}:
+        <br>
+        {{chineseMessage}}
+    </div>
+    <div>
+        <img v-if="basicImage" src="https://www.csanl.com.br/alunos/votar/f7/c/f7c36/internet/imagem-GIF.gif" >
+        <br>
+        <img v-if="premiumImage" src="https://multimedia.scmp.com/infographics/culture/article/3206232/year-of-the-rabbit/img/scroll-animal-lg.gif" >
+    </div>
+</div>
+</body>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            name: '',
+            message: '',
+            basicMessageBtn: false,
+            premiumMessageBtn: false,
+            signo: '',
+            chineseSigno: '',
+            chineseMessage: '',
+            basicImage: false,
+            premiumImage: false,
+            blockBtn: true,
+
+        },
+        methods: {
+            basicAlert(){
+                alert(`O Usuário ${this.name} não é Premium :(`)
+            },
+
+            premiumAlert(){
+                alert(`O Usuário ${this.name} é Premium!`)
+            },
+
+            Autenticate(){
+                const url = `https://localhost:7180/PlanoPremium?user=${this.name}`;
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status == true) {
+                            this.premiumAlert()
+                            this.blockBtn = false
+                        }
+                        else {
+                            this.basicAlert()
+                            this.blockBtn = true
+                        }
+                    })
+                    .catch(error => {
+                        // Trate possíveis erros
+                        console.error('Ocorreu um erro:', error);
+                    });
+                },
+
+            getBasicMessage(){
+                fetch('https://localhost:7180/PlanoBasico')
+                .then(response => response.json())
+                .then(data => {
+                    this.premiumImage = false
+                    this.basicImage = true
+                    this.signo = data.signo
+                    this.message = data.frase
+                    this.chineseSigno = ''
+                    this.chineseMessage = ''
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            },
+
+            getPremiumMessage(){
+                const url = `https://localhost:7180/PlanoPremium?user=${this.name}`
+                fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    this.premiumImage = true
+                    this.basicImage = true
+                    this.signo = data.signo
+                    this.message = data.frase
+                    this.chineseSigno = data.signoChines
+                    this.chineseMessage = data.fraseChinesa
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            },
+        },
+
+    })
+</script>
